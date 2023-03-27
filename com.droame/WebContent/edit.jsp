@@ -135,11 +135,12 @@ h1 {
 <div class="container">
     <div class="brand-logo"></div>
     <div class="brand-title">DROAME</div>
+    
+        <!--  this form data is posted to fetch. jsp file where we execute select query to fetch the customer data as per customer id -->
+    
     <form action="fetch.jsp" method="post">
     <div class="inputs">
-        <label for="customername"> Customer_Name</label><br>
-        
-        <input type="text" name="customername" placeholder="Name" required>
+       
 
 
         <label for="customerid"> Customer_Id</label><br>
