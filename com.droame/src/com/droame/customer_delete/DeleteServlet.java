@@ -29,18 +29,26 @@ public class DeleteServlet extends HttpServlet {
 		
 		
 				PrintWriter pw = response.getWriter();
+				// getting the customer id value from the delete.html file
 				String id= request.getParameter("customerid");
 
 
 		
 		try {
+			
+			//code for connecting to database
 			Class.forName("com.mysql.jdbc.Driver");
+			//customer is the database name
 			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/customer","root","");
-//			Statement obj=con.createStatement();
-	        PreparedStatement ps = con.prepareStatement("delete from customer_details where customerid=?");
+			
+//			 we use prepared statement to execute the delete query which automatically inject the value at place of question mark
+//			prepared statement is more secure than directly putting the value
+			
+	        PreparedStatement ps = con.prepareStatement("delete from customer_details where customerid=?");  //customer_details is the table name
 	        ps.setString(1, id);
 
 	        int i = ps.executeUpdate();
+	        //checking the query is executed or not
 
 	        if(i > 0) {
 	            pw.println("User successfully removed...");

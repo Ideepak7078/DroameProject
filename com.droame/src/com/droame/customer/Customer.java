@@ -36,9 +36,10 @@ public class Customer extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		//Getting Data from the customer details form
 		
 		PrintWriter obj=response.getWriter();
+			//Getting Data from the customer details form
+
 		String customername=request.getParameter("customername");
 		String customerid=request.getParameter("customerid");
 		String phone=request.getParameter("phone");
@@ -55,27 +56,16 @@ public class Customer extends HttpServlet {
 		
 		
 		
-//		sending data to database
-
-		
-		obj.println(customername);
-		obj.println(customerid);
-		obj.println(phone);
-		obj.println(email);
-		obj.println(location);
-		obj.println(locationid);
-		obj.println(droneshotid);
-		obj.println(email);
-		obj.println(gender);
-//		obj.println(age);
 		
 		 try{
+			 //code to connect to the database
 
 		    	Class.forName("com.mysql.cj.jdbc.Driver");  
 		    	Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/customer","root","");  
+//				 we use prepared statement to execute the delete query which automatically inject the value at place of question mark
 
 		    	PreparedStatement pst=con.prepareStatement("insert into customer_details values(?,?,?,?,?,?,?,?,?,?,?)");
-
+//setting up the values at desired place
 	pst.setString(1,customername);  
 	pst.setString(2,customerid);  
 	pst.setString(3,phone);
@@ -91,13 +81,14 @@ public class Customer extends HttpServlet {
 	pst.setString(9,location);
 	pst.setString(10,locationid);
 	pst.setString(11,droneshotid);
+//	sending data to database
 
 	int cout=pst.executeUpdate();
 	if(cout==0) {
 	obj.print("not stored");
 	}
 	else {
-		obj.print("Stored");
+		obj.print("Stored"); // checking value stored or not
 	}
 	   
 		    	}

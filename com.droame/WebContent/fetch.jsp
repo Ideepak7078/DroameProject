@@ -54,7 +54,7 @@ try {
    }
       out.print ("</table>");
       out.print(rs.getString(2));
-      
+      // checking that the customer id should be valid
       if(rs.getString(2)==""){
     	  out.print("There is no customer with this customerid");
     		

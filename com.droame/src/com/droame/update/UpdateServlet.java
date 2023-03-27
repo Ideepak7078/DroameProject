@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class UpdateServlet
  */
 @WebServlet("/UpdateServlet")
+
 public class UpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -24,10 +25,8 @@ public class UpdateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		// TODO Auto-generated method stub
 		
 	//Getting Data from the customer details form
-//		String s=(String) request.getAttribute("customerid");
 		
 		PrintWriter obj=response.getWriter();
 		String customername=request.getParameter("customername");
@@ -46,24 +45,13 @@ public class UpdateServlet extends HttpServlet {
 		
 		
 		
-//		sending data to database
-
-		
-		obj.println(customername);
-		obj.println(customerid);
-		obj.println(phone);
-		obj.println(email);
-		obj.println(location);
-		obj.println(locationid);
-		obj.println(droneshotid);
-		obj.println(email);
-		obj.println(gender);
-//		obj.println(age);
+//		connecting to database
 		
 		 try{
 
 		    	Class.forName("com.mysql.cj.jdbc.Driver");  
 		    	Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/customer","root","");  
+		    	//code for executing query using preparedstatement method
 
 		    	PreparedStatement pst=con.prepareStatement("update customer_details set customername=?, customerid=?,phone=?,email=?,gender=?,adress=?,Nationality=?,Bookingid=?,location=?,locationid=?,droneshotid=? where customerid=?");
 
@@ -83,15 +71,14 @@ public class UpdateServlet extends HttpServlet {
 	pst.setString(10,locationid);
 	pst.setString(11,droneshotid);
 	pst.setString(12,customerid);
-//	obj.print(s);
 
 
 	int cout=pst.executeUpdate();
 	if(cout==0) {
-	obj.print("updated");
+	obj.print("not updated");
 	}
 	else {
-		obj.print("not updated");
+		obj.print("updated"); // checking record is updated or not
 	}
 	   
 		    	}
